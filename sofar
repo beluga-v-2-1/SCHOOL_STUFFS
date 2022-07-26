@@ -1,0 +1,85 @@
+import mysql.connector
+c=mysql.connector.connect(host="localhost",user="root",password="password",database="test",charset="utf8")
+curs=c.cursor()
+curs.execute("use test")
+c=0
+
+def end():
+    print("thanks for using my program")
+    
+
+
+
+def addpeople():
+    print("thanks for choosing to add new employees")
+    print()
+    print("Here's the present table")
+    table=curs.fetchall()
+    for x in table:
+        print(x)
+
+    
+    
+    print("enter a admission number")
+    n1=input()
+    print("enter a new name")
+    n2=input()
+    print("enter a new phoneno")
+    n3=input()
+    print("enter sex")
+    n4=input()
+    print("enter a age ")
+    n5=input()
+    curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
+    curs.execute("select * from employeetest")
+    results=curs.fetchall()
+    for i in results :
+        print(i)
+
+
+def view():
+    curs.execute("select * from employeetest")
+    table=curs.fetchall()
+    print(table)
+
+    '''for i in table:
+        print(i)'''
+
+def startscreen():
+    print("+--------------------------------------------------------------+")
+    print("|        WELCOME TO HYPERMARKET MAX (employee edition)         |")
+    print("+--------------------------------------------------------------+")
+    print("                                                                ")
+    print("+--------------------------------------------------------------+")
+    print("| WHAT DO YOU NEED HELP WITH ?                                 |")
+    print("+-----------------------------------+--------------------------+")
+    print("| Add employees                     | TYPE 1                   |")
+    print("| View employee list                | TYPE 2                   |")
+    print("| End this endless loop             | TYPE 3                   |")
+    print("+-----------------------------------+--------------------------+")
+    print()
+    print("enter your choice")
+    choice=input()
+    if choice=="1":
+        addpeople()
+
+    if choice=="2":
+        print("Here's the present table")
+        view()
+        
+
+    if choice=="3":
+        c=1
+        end()
+
+    else:
+        print("please enter a valid option")
+        startscreen()
+        
+    
+
+
+
+startscreen()
+
+
