@@ -21,15 +21,15 @@ def addpeople():
     
     
     print("enter a admission number")
-    n1=input()
+    n1=input("> ")
     print("enter a new name")
-    n2=input()
+    n2=input("> ")
     print("enter a new phoneno")
-    n3=input()
+    n3=input("> ")
     print("enter sex")
-    n4=input()
+    n4=input("> ")
     print("enter a age ")
-    n5=input()
+    n5=input("> ")
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
     curs.execute("select * from employeetest")
     results=curs.fetchall()
@@ -59,7 +59,7 @@ def startscreen():
     print("+-----------------------------------+--------------------------+")
     print()
     print("enter your choice")
-    choice=input()
+    choice=input("> ")
     if choice=="1":
         addpeople()
 
