@@ -16,29 +16,55 @@ def addpeople():
     print()
     print("Here's the present table")    
     curs.execute("select * from employeetest")
+    print("TYPE END TO GO BACK TO THE MAIN MENU")
     table=curs.fetchall()
     for x in table:
         print(x)
+
+
+        
     print("enter a admission number")
     n1=input(">>>")
-    if n1.isdigit()==False:
+
+    if n1.lower()=="end":
+        print("command detected, moving to MAIN MENU")
+        startscreen()
+
+    elif n1.isdigit()==False:
         print("try using your brain and enter a proper number ?")
         addpeople()
-        
+
     print("enter a new name")
     n2=input(">>>")
-    if n2.isalpha()==False:
+    
+    if n2.lower()=="end":
+        print("command detected, moving to MAIN MENU")
+        startscreen()
+
+    elif n2.isalpha()==False:
         print("try using your brain and enter a proper name ?")
         addpeople()
+
+
+        
     print("enter a new phoneno")
     n3=input(">>>")
-    if n3.isdigit()==False:
-        print("try using your brain and enter a proper phone ?")
-        addpeople()
+    
+        
+    if n1.lower()=="end":
+        print("command detected, moving to MAIN MENU")
+        startscreen()
+
+    elif n3.isdigit()==False:
+            print("try using your brain and enter a proper phone ?")
+            addpeople()
     
     print("enter sex")
     n4=input(">>>")
-    if n4=="M":
+    if n1.lower()=="end":
+        print("command detected, moving to MAIN MENU")
+        startscreen()
+    elif n4=="M":
         nott+=1
     elif n4=="m":
         nott+=1
@@ -46,6 +72,9 @@ def addpeople():
         nott+=1
     elif n4=="f":
         nott+=1
+        
+    
+
 
     else:
         print("arent you tired of trying to break my program ?")
@@ -53,10 +82,19 @@ def addpeople():
         addpeople()
         
     print("enter a age ")
-    n5=input()
-    if n5.isdigit()==False:
+    n5=input(">>>")
+
+    if n1.lower()=="end":
+        
+        print("command detected, moving to MAIN MENU")
+        startscreen()
+    elif n5.isdigit()==False:
         print("try using your brain and enter a proper number ?")
-        addpeople()    
+        addpeople()
+
+
+    
+        
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
     curs.execute("select * from employeetest")
     results=curs.fetchall()
@@ -112,4 +150,5 @@ def startscreen():
 
 
 startscreen()
+
 
