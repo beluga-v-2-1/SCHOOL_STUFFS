@@ -2,46 +2,76 @@ import mysql.connector
 c=mysql.connector.connect(host="localhost",user="root",password="password",database="test",charset="utf8")
 curs=c.cursor()
 curs.execute("use test")
-c=0
-
+m=0
 def end():
     print("thanks for using my program")
+    exit()
     
 
 
 
 def addpeople():
-    print("thanks for choosing to add new employees")
+    nott=0
+    print("Alright... lets add new employees")
     print()
-    print("Here's the present table")
+    print("Here's the present table")    
+    curs.execute("select * from employeetest")
     table=curs.fetchall()
     for x in table:
         print(x)
-
-    
-    
     print("enter a admission number")
-    n1=input("> ")
+    n1=input(">>>")
+    if n1.isdigit()==False:
+        print("try using your brain and enter a proper number ?")
+        addpeople()
+        
     print("enter a new name")
-    n2=input("> ")
+    n2=input(">>>")
+    if n2.isalpha()==False:
+        print("try using your brain and enter a proper name ?")
+        addpeople()
     print("enter a new phoneno")
-    n3=input("> ")
+    n3=input(">>>")
+    if n3.isdigit()==False:
+        print("try using your brain and enter a proper phone ?")
+        addpeople()
+    
     print("enter sex")
-    n4=input("> ")
+    n4=input(">>>")
+    if n4=="M":
+        nott+=1
+    elif n4=="m":
+        nott+=1
+    elif n4=="F":
+        nott+=1
+    elif n4=="f":
+        nott+=1
+
+    else:
+        print("arent you tired of trying to break my program ?")
+        print("try using your brain and entering either m or f !!!")
+        addpeople()
+        
     print("enter a age ")
-    n5=input("> ")
+    n5=input()
+    if n5.isdigit()==False:
+        print("try using your brain and enter a proper number ?")
+        addpeople()    
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
     curs.execute("select * from employeetest")
     results=curs.fetchall()
+    
     for i in results :
         print(i)
-
+    print("process done")
+    startscreen()
 
 def view():
     curs.execute("select * from employeetest")
     table=curs.fetchall()
-    print(table)
-
+    for i in table:
+        print(i)
+    startscreen()
     '''for i in table:
         print(i)'''
 
@@ -56,22 +86,23 @@ def startscreen():
     print("| Add employees                     | TYPE 1                   |")
     print("| View employee list                | TYPE 2                   |")
     print("| End this endless loop             | TYPE 3                   |")
-    print("+-----------------------------------+--------------------------+")
+    print("+----------------------------------+---------------------------+")
     print()
     print("enter your choice")
-    choice=input("> ")
-    if choice=="1":
+    choice=input(">>>")
+    digit=choice.isdigit()
+    
+    if digit==False:
+        print("DUDE PLEASE ENTER A NUMBER")
+        startscreen()
+    elif choice=="1":
         addpeople()
-
-    if choice=="2":
+    elif choice=="2":
         print("Here's the present table")
         view()
-        
-
-    if choice=="3":
+    elif choice=="3":
         c=1
         end()
-
     else:
         print("please enter a valid option")
         startscreen()
@@ -81,5 +112,4 @@ def startscreen():
 
 
 startscreen()
-
 
