@@ -6,10 +6,6 @@ m=0
 def end():
     print("thanks for using my program")
     exit()
-    
-
-
-
 def addpeople():
     nott=0
     print("Alright... lets add new employees")
@@ -19,46 +15,31 @@ def addpeople():
     print("TYPE END TO GO BACK TO THE MAIN MENU")
     table=curs.fetchall()
     for x in table:
-        print(x)
-
-
-        
+        print(x)  
     print("enter a admission number")
     n1=input(">>>")
-
     if n1.lower()=="end":
         print("command detected, moving to MAIN MENU")
         startscreen()
-
     elif n1.isdigit()==False:
         print("try using your brain and enter a proper number ?")
         addpeople()
-
     print("enter a new name")
     n2=input(">>>")
-    
     if n2.lower()=="end":
         print("command detected, moving to MAIN MENU")
         startscreen()
-
     elif n2.isalpha()==False:
         print("try using your brain and enter a proper name ?")
-        addpeople()
-
-
-        
+        addpeople()  
     print("enter a new phoneno")
     n3=input(">>>")
-    
-        
     if n1.lower()=="end":
         print("command detected, moving to MAIN MENU")
         startscreen()
-
     elif n3.isdigit()==False:
             print("try using your brain and enter a proper phone ?")
             addpeople()
-    
     print("enter sex")
     n4=input(">>>")
     if n1.lower()=="end":
@@ -72,47 +53,31 @@ def addpeople():
         nott+=1
     elif n4=="f":
         nott+=1
-        
-    
-
-
     else:
         print("arent you tired of trying to break my program ?")
         print("try using your brain and entering either m or f !!!")
-        addpeople()
-        
+        addpeople()   
     print("enter a age ")
     n5=input(">>>")
-
     if n1.lower()=="end":
-        
         print("command detected, moving to MAIN MENU")
         startscreen()
     elif n5.isdigit()==False:
         print("try using your brain and enter a proper number ?")
         addpeople()
-
-
-    
-        
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
     curs.execute("select * from employeetest")
     results=curs.fetchall()
-    
     for i in results :
         print(i)
     print("process done")
     startscreen()
-
 def view():
     curs.execute("select * from employeetest")
     table=curs.fetchall()
     for i in table:
         print(i)
     startscreen()
-    '''for i in table:
-        print(i)'''
-
 def startscreen():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX (employee edition)         |")
@@ -129,7 +94,6 @@ def startscreen():
     print("enter your choice")
     choice=input(">>>")
     digit=choice.isdigit()
-    
     if digit==False:
         print("DUDE PLEASE ENTER A NUMBER")
         startscreen()
@@ -144,11 +108,4 @@ def startscreen():
     else:
         print("please enter a valid option")
         startscreen()
-        
-    
-
-
-
 startscreen()
-
-
