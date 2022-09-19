@@ -1,4 +1,5 @@
 import mysql.connector
+import time 
 c=mysql.connector.connect(host="localhost",user="root",password="password",database="test",charset="utf8")
 curs=c.cursor()
 curs.execute("use test")
@@ -6,44 +7,62 @@ m=0
 def end():
     print("thanks for using my program")
     exit()
+def ty1( message ) :
+    for i in message :
+        print(i,end="")
+        time.sleep(0.07)
+    print()
+
+def ty2(message):
+    for i in message :
+        print(i,end="")
+        time.sleep(0.01)
+    print()
+
+
+def ty3(message):
+    for i in message :
+        print(i,end="")
+        time.sleep(0.001)
+    print()
 def addpeople():
     nott=0
-    print("Alright... lets add new employees")
+    ty2("Alright... lets add new employees")
     print()
-    print("Here's the present table")    
+    ty2("Here's the present table")    
     curs.execute("select * from employeetest")
-    print("TYPE END TO GO BACK TO THE MAIN MENU")
+    ty1("TYPE END TO GO BACK TO THE MAIN MENU")
     table=curs.fetchall()
     for x in table:
         print(x)  
-    print("enter a admission number")
+    ty1("enter a admission number")
     n1=input(">>>")
     if n1.lower()=="end":
-        print("command detected, moving to MAIN MENU")
+        ty2("command detected, moving to MAIN MENU")
         startscreen()
     elif n1.isdigit()==False:
-        print("try using your brain and enter a proper number ?")
+        ty1("try using your brain and enter a proper number ?")
         addpeople()
-    print("enter a new name")
+    ty1("enter a new name")
     n2=input(">>>")
     if n2.lower()=="end":
-        print("command detected, moving to MAIN MENU")
+        ty2("command detected, moving to MAIN MENU")
         startscreen()
     elif n2.isalpha()==False:
-        print("try using your brain and enter a proper name ?")
+        ty2("try using your brain and enter a proper name ?")
         addpeople()  
-    print("enter a new phoneno")
+    ty1("enter a new phoneno")
     n3=input(">>>")
     if n1.lower()=="end":
-        print("command detected, moving to MAIN MENU")
+        ty2("command detected, moving to MAIN MENU")
         startscreen()
     elif n3.isdigit()==False:
-            print("try using your brain and enter a proper phone ?")
+            ty2("try using your brain and enter a proper phone ?")
             addpeople()
-    print("enter sex")
+    ty1("enter sex")
     n4=input(">>>")
     if n1.lower()=="end":
-        print("command detected, moving to MAIN MENU")
+        ty2("command detected, moving to MAIN MENU")
         startscreen()
     elif n4=="M":
         nott+=1
@@ -54,16 +73,16 @@ def addpeople():
     elif n4=="f":
         nott+=1
     else:
-        print("arent you tired of trying to break my program ?")
-        print("try using your brain and entering either m or f !!!")
+        ty2("arent you tired of trying to break my program ?")
+        ty2("try using your brain and entering either m or f !!!")
         addpeople()   
-    print("enter a age ")
+    ty1("enter a age ")
     n5=input(">>>")
     if n1.lower()=="end":
-        print("command detected, moving to MAIN MENU")
+        ty2("command detected, moving to MAIN MENU")
         startscreen()
     elif n5.isdigit()==False:
-        print("try using your brain and enter a proper number ?")
+        ty2("try using your brain and enter a proper number ?")
         addpeople()
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
     curs.execute("select * from employeetest")
@@ -78,6 +97,106 @@ def view():
     for i in table:
         print(i)
     startscreen()
+def specview():
+    ty1("lets search for a product")
+    ty2("type end to escape back to main menu")
+    print(" ")
+    ty1("enter the first few letter of your productname")
+    n=input(">>>")
+    if n.lower=="end":
+        startscreen()
+    if n.isalpha==True:
+        
+        curs.execute("select * from menutest where proname like'{}%'".format(n))
+        table=curs.fetchall()
+        if len(table)==0:
+            ty2("there are no results for your search")
+            ty2("lets try another seearch")
+            specview()
+        else:      
+            for i in table:
+                print(i)
+            ty2("this is all the available search results")
+            ty2("going back to main menu")
+            startscreen()
+    else:
+        ty1("enter a alphabetic charecter")
+        specview()
+def deleteemployee():
+    ty2("enter the admno of the person you want to delete")
+    name=input(">>>")
+    curs.execute("select admno,name,age from menutest where employeetest={}'".format(name))
+    finite=curs.fetchall()
+    
+
+    ty2(f"are you sure you want to delete {finite} from this table ?")
+    choice=input(">>>")
+    
+    
+    
+
+
+
+    
+
+def viewmenu():
+    curs.execute("select * from menutest")
+    table=curs.fetchall()
+    for i in table:
+        print(i)
+    startscreen()
+def insertfood():
+    nott=0
+    ty2("Alright... lets add a new product")
+    print()
+    ty2("Here's the present list of products")    
+    curs.execute("select * from menutest")
+    ty2("TYPE END TO GO BACK TO THE MAIN MENU")
+    table=curs.fetchall()
+    for x in table:
+        ty3(x)  
+    ty1("enter a sino")
+    n1=input(">>>")                       #first input(sino)
+    if n1.lower()=="end":
+        ty2("command detected, moving to MAIN MENU")
+        startscreen()
+    elif n1.isdigit()==False:
+        ty2("try using your brain and enter a proper number ?")
+        insertfood()
+    ty1("enter the proname")
+    n2=input(">>>")                       #second input(proname)
+    if n2.lower()=="end":
+        ty2("command detected, moving to MAIN MENU")
+        startscreen()  
+    ty1("enter the sale price")         #third input(price)
+    n3=input(">>>")
+    if n3.lower()=="end":
+        ty2("command detected, moving to MAIN MENU")
+        startscreen()
+    elif n3.isdigit()==False:
+            ty2("try entering a proper phone ?")
+            insertfood()
+    ty1("enter producer")                   #fourth input(producer)
+    n4=input(">>>")
+    if n4.isalpha==True:
+        ty2(f"enter a name please")
+        insertfood()
+    ty1("enter the batchno ")                     #fifth input(batchno)
+    n5=input(">>>")
+    if n5.lower()=="end":
+        ty2("command detected, moving to MAIN MENU")
+        startscreen()
+    elif n5.isdigit()==False:
+        ty2("try and enter a proper number ?")
+        insertfood()
+    curs.execute("insert into menutest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
+    curs.execute("select * from menutest")
+    results=curs.fetchall()
+    for i in results :
+        ty3(i)
+    ty3("process done")
+    startscreen()
+    
 def startscreen():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX (employee edition)         |")
@@ -88,24 +207,35 @@ def startscreen():
     print("+-----------------------------------+--------------------------+")
     print("| Add employees                     | TYPE 1                   |")
     print("| View employee list                | TYPE 2                   |")
-    print("| End this endless loop             | TYPE 3                   |")
+    print("| view product list                 | TYPE 3                   |")
+    print("| insert a product                  | TYPE 4                   |")
+    print("| search product with name          | TYPE 5                   |")
+    print("| end this whole program            | TYPE 6                   |")
     print("+----------------------------------+---------------------------+")
     print()
-    print("enter your choice")
+    ty1("enter your choice")
     choice=input(">>>")
     digit=choice.isdigit()
     if digit==False:
-        print("DUDE PLEASE ENTER A NUMBER")
+        ty2("PLEASE ENTER A NUMBER")
         startscreen()
     elif choice=="1":
         addpeople()
     elif choice=="2":
-        print("Here's the present table")
+        ty1("Here's the present table")
         view()
     elif choice=="3":
+        ty1("heres the list of all products")
+        viewmenu()
+    elif choice=="4":
+        insertfood()
+    elif choice=="5":
+        specview()
+    elif choice=="6":
         c=1
         end()
     else:
-        print("please enter a valid option")
+        ty2("please enter a valid option")
         startscreen()
 startscreen()
+
