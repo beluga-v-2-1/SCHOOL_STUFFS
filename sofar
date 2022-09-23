@@ -125,19 +125,37 @@ def specview():
 def deleteemployee():
     ty2("enter the admno of the person you want to delete")
     name=input(">>>")
-    curs.execute("select admno,name,age from menutest where employeetest={}'".format(name))
+    curs.execute("select admno,name,age from employeetest where admno={}".format(name))
     finite=curs.fetchall()
-    
-
-    ty2(f"are you sure you want to delete {finite} from this table ?")
+    print(f"are you sure you want to delete {finite} from this table ?")
+    ty2("type y for yes")
+    ty2("type n for no")
+    ty2("type end to go back")
     choice=input(">>>")
-    
-    
-    
+    if choice.lower=="end":
+        ty2("moving back to main menu")
+        startscreen()
+    elif choice.lower=="y":
+        print(f"deleting {finite} from the database of employees")
+        curs.execute("delete from employeetest where admno={}".format(name))
+        print(f"succesfully deleted {finite} from the database")
+        ty2("would you like to delete more or return back to main menu")
+        ty3("type y for yes")
+        ty3("type n for no")
+        supra=input(">>>")
+        if supra.lower=="y":
+            ty2("moving back to main menu")
+            startscreen()
+        elif supra.lower=="n":
+            ty2("continuing the process of removing more members")
+            deleteemployee()
+    elif choice.lower=="n":
+        ty2("lets enter new values")
+        deleteemployee()
 
-
-
-    
+    else:
+        ty2("please enter a valid option (either y , n or end.)")
+        deleteemployee()
 
 def viewmenu():
     curs.execute("select * from menutest")
@@ -154,8 +172,8 @@ def insertfood():
     ty2("TYPE END TO GO BACK TO THE MAIN MENU")
     table=curs.fetchall()
     for x in table:
-        ty3(x)  
-    ty1("enter a sino")
+        print(x)  
+    ty2("enter a sino")
     n1=input(">>>")                       #first input(sino)
     if n1.lower()=="end":
         ty2("command detected, moving to MAIN MENU")
@@ -163,12 +181,12 @@ def insertfood():
     elif n1.isdigit()==False:
         ty2("try using your brain and enter a proper number ?")
         insertfood()
-    ty1("enter the proname")
+    ty2("enter the proname")
     n2=input(">>>")                       #second input(proname)
     if n2.lower()=="end":
         ty2("command detected, moving to MAIN MENU")
         startscreen()  
-    ty1("enter the sale price")         #third input(price)
+    ty2("enter the sale price")         #third input(price)
     n3=input(">>>")
     if n3.lower()=="end":
         ty2("command detected, moving to MAIN MENU")
@@ -176,12 +194,12 @@ def insertfood():
     elif n3.isdigit()==False:
             ty2("try entering a proper phone ?")
             insertfood()
-    ty1("enter producer")                   #fourth input(producer)
+    ty2("enter producer")                   #fourth input(producer)
     n4=input(">>>")
     if n4.isalpha==True:
         ty2(f"enter a name please")
         insertfood()
-    ty1("enter the batchno ")                     #fifth input(batchno)
+    ty2("enter the batchno ")                     #fifth input(batchno)
     n5=input(">>>")
     if n5.lower()=="end":
         ty2("command detected, moving to MAIN MENU")
@@ -193,13 +211,85 @@ def insertfood():
     curs.execute("select * from menutest")
     results=curs.fetchall()
     for i in results :
-        ty3(i)
-    ty3("process done")
-    startscreen()
-    
-def startscreen():
+        print(i)
+    ty1("process done")
+    ty2("do you want to enter more products")
+    ty2("for adding more products type y")
+    ty2("for continuing back to main menu type n")
+    ty2("for going back type end")
+    choice=input(">>>")
+    if choice.lower=="end":
+        ty2("moving to main menu")
+        startscreen()
+    elif choice.lower=="y":
+        ty2("lets add more products then")
+        insertfood()
+    elif choice.lower=="n":
+        ty2("exiting to main menu")
+        startscreen()
+    else :
+        print("please enter a alphabetical value(either end, y or n)")
+        insertfood()
+
+def welcomescreen():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX (employee edition)         |")
+    print("+--------------------------------------------------------------+")
+    print("                                                                ")
+    print("+--------------------------------------------------------------+")
+    print("| where customers come to fulfil their shopping needs          |")
+    print("+--------------------------------------------------------------+")
+    print("| Select profile                                               |")
+    print("+------------------------------------+-------------------------+")
+    print("| Customer                           | TYPE 1                  |")
+    print("| Retailer                           | TYPE 2                  |")
+    print("| end this whole program             | TYPE EXIT               |")
+    print("+------------------------------------+-------------------------+")
+    print()
+    ty1("enter your choice")
+    choice=input(">>>")
+    digit=choice.isdigit()
+    if digit==False:
+        ty2("PLEASE ENTER A NUMBER")
+    elif choice=="1":
+        startcustomer()
+    elif choice=="2":
+        startemployee()
+        
+    
+def startcustomer():
+    print("+--------------------------------------------------------------+")
+    print("|        WELCOME TO HYPERMARKET MAX (Retailer edition)         |")
+    print("+--------------------------------------------------------------+")
+    print("                                                                ")
+    print("+--------------------------------------------------------------+")
+    print("| WHAT DO YOU NEED HELP WITH ?                                 |")
+    print("+-----------------------------------+--------------------------+")
+    print("| View product                      | TYPE 1                   |")
+    print("| Search for a product              | TYPE 2                   |")
+    print("| view product by pricing           | TYPE 3                   |")
+    print("| Exit program                      | TYPE 4                   |")
+    print("| Go back to welcome screen         | TYPE end                 |")
+    print("+-----------------------------------+--------------------------+")
+        ty2("enter your choice")
+    choice=input(">>>")
+    digit=choice.isdigit()
+    if choice=="end":
+        ty2("moving to welcome screen")
+        welcomescreen()
+    if digit==False:
+        ty2("PLEASE ENTER A NUMBER")
+    elif choice=="1":
+        startcustomer()
+    elif choice=="2":
+        startemployee()
+    
+
+
+   
+def startscreen():
+    print("+--------------------------------------------------------------+")
+    print("|        WELCOME TO HYPERMARKET MAX (Retailer edition)         |")
     print("+--------------------------------------------------------------+")
     print("                                                                ")
     print("+--------------------------------------------------------------+")
@@ -218,6 +308,7 @@ def startscreen():
     digit=choice.isdigit()
     if digit==False:
         ty2("PLEASE ENTER A NUMBER")
+        
         startscreen()
     elif choice=="1":
         addpeople()
@@ -237,5 +328,7 @@ def startscreen():
     else:
         ty2("please enter a valid option")
         startscreen()
+        
 startscreen()
+
 
