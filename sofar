@@ -143,10 +143,10 @@ def deleteemployee():
         ty3("type y for yes")
         ty3("type n for no")
         supra=input(">>>")
-        if supra.lower=="y":
+        if supra.lower=="n":
             ty2("moving back to main menu")
-            startscreen()
-        elif supra.lower=="n":
+            employeescreen()
+        elif supra.lower=="y":
             ty2("continuing the process of removing more members")
             deleteemployee()
     elif choice.lower=="n":
@@ -233,13 +233,13 @@ def insertfood():
 
 def welcomescreen():
     print("+--------------------------------------------------------------+")
-    print("|        WELCOME TO HYPERMARKET MAX (employee edition)         |")
+    print("|        WELCOME TO HYPERMARKET MAX                            |")
     print("+--------------------------------------------------------------+")
     print("                                                                ")
     print("+--------------------------------------------------------------+")
     print("| where customers come to fulfil their shopping needs          |")
     print("+--------------------------------------------------------------+")
-    print("| Select profile                                               |")
+    print("| Select profile                                               |")    #welcome screen
     print("+------------------------------------+-------------------------+")
     print("| Customer                           | TYPE 1                  |")
     print("| Retailer                           | TYPE 2                  |")
@@ -256,20 +256,55 @@ def welcomescreen():
     elif choice=="2":
         startemployee()
         
+def priceview():
+    curs.execute("select * from menutest orderby proname=asc")
+    table=curs.fetchall()
+    for i in table:
+        print(i)
+    startcustomer()
+    
+def employeesearch():
+    ty1("lets search for an employee
+    ty2("type end to escape back to main menu")
+    print("")
+    ty1("enter the first few letter of your employeename")
+    n=input(">>>")
+    if n.lower=="end":
+        startscreen()
+    if n.isalpha==True:
+        
+        curs.execute("select * from employeetest where name like'{}%'".format(n))
+        table=curs.fetchall()
+        if len(table)==0:
+            ty2("there are no results for your search")
+            ty2("lets try another seearch")
+            employeesearch()
+        else:      
+            for i in table:
+                print(i)
+            ty2("this is all the available search results")
+            ty2("going back to main menu")
+            employeescreen()
+    else:
+        ty1("enter a alphabetic charecter")
+        employeesearch()
+
+    
+    
     
 def startcustomer():
     print("+--------------------------------------------------------------+")
-    print("|        WELCOME TO HYPERMARKET MAX (Retailer edition)         |")
+    print("|        WELCOME TO HYPERMARKET MAX (customer edition)         |")
     print("+--------------------------------------------------------------+")
     print("                                                                ")
     print("+--------------------------------------------------------------+")
     print("| WHAT DO YOU NEED HELP WITH ?                                 |")
-    print("+-----------------------------------+--------------------------+")
-    print("| View product                      | TYPE 1                   |")
+    print("+-----------------------------------+--------------------------+")    #customer version
+    print("| View product list                 | TYPE 1                   |")
     print("| Search for a product              | TYPE 2                   |")
     print("| view product by pricing           | TYPE 3                   |")
-    print("| Exit program                      | TYPE 4                   |")
-    print("| Go back to welcome screen         | TYPE end                 |")
+    print("| Go back to welcome screen         | TYPE 4                   |")
+    print("| Exit program                      | TYPE end                 |")
     print("+-----------------------------------+--------------------------+")
         ty2("enter your choice")
     choice=input(">>>")
@@ -277,29 +312,39 @@ def startcustomer():
     if choice=="end":
         ty2("moving to welcome screen")
         welcomescreen()
-    if digit==False:
+    elif digit==False:
         ty2("PLEASE ENTER A NUMBER")
-    elif choice=="1":
+    elif choice=="1":                                      #first viewing product list
+        ty1("heres the list of all products")
+        viewmenu()
+    elif choice=="2":                                      #second searching for a product
+        specview()
+    elif choice=="3":                                      #third viewing in asc order
+        ty2("here is the product list in the ascending order")
+        priceview()    
+    elif choice=="4":                                      #fourth going back to welcome screen
+        welcomescreen()     
+    elif choice=="5":                                      #fifth exiting the program
+        end()
+    else:
+        ty2("please enter a valid option either end y,n")
         startcustomer()
-    elif choice=="2":
-        startemployee()
     
 
 
    
-def startscreen():
+def employeescreen():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX (Retailer edition)         |")
     print("+--------------------------------------------------------------+")
     print("                                                                ")
     print("+--------------------------------------------------------------+")
     print("| WHAT DO YOU NEED HELP WITH ?                                 |")
-    print("+-----------------------------------+--------------------------+")
+    print("+-----------------------------------+--------------------------+")   #employee version
     print("| Add employees                     | TYPE 1                   |")
     print("| View employee list                | TYPE 2                   |")
-    print("| view product list                 | TYPE 3                   |")
-    print("| insert a product                  | TYPE 4                   |")
-    print("| search product with name          | TYPE 5                   |")
+    print("| Delete an employee with admno     | TYPE 3                   |")
+    print("| Search an employee with name      | TYPE 4                   |")
     print("| end this whole program            | TYPE 6                   |")
     print("+----------------------------------+---------------------------+")
     print()
@@ -308,18 +353,18 @@ def startscreen():
     digit=choice.isdigit()
     if digit==False:
         ty2("PLEASE ENTER A NUMBER")
-        
         startscreen()
-    elif choice=="1":
-        addpeople()
+    elif choice=="1":                                                          
+        addpeople()                                                          #add  employee
     elif choice=="2":
-        ty1("Here's the present table")
+        ty2(Here's the present employee table")                             #view employee list
         view()
     elif choice=="3":
-        ty1("heres the list of all products")
-        viewmenu()
+        ty1("lets delete an employee from the database")                     #deleting employee
+        deleteemployee()
     elif choice=="4":
-        insertfood()
+        ty2("lets search an employee")                      #searching an employee with name
+        employeesearch()
     elif choice=="5":
         specview()
     elif choice=="6":
