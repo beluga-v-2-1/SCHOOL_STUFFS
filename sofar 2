@@ -1,4 +1,4 @@
 import mysql.connector
-c=mysql.connector.connect(host="localhost",user="root",password="password",database="test",charset="utf8")
+c=mysql.connector.connect(host="localhost",user="root",password="password",charset="utf8")
 curs=c.cursor()
-curs.execute("create table menutest ")
+curs.execute("create database test")
