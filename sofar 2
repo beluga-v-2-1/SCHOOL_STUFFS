@@ -1,4 +1,16 @@
 import mysql.connector
 c=mysql.connector.connect(host="localhost",user="root",password="password",charset="utf8")
 curs=c.cursor()
-curs.execute("create database test")
+
+print("is this the first time initiating this program ?")
+def checker():
+
+  print("type y for yes and n for no")
+  choice=input(">>>")
+  if choice=="y":
+    curs.execute("create database test")
+  elif choice=="n":
+    print("please use the other program")
+
+  else:
+    print("please type an actual value")
