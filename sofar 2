@@ -9,8 +9,19 @@ def checker():
   choice=input(">>>")
   if choice=="y":
     curs.execute("create database test")
+    curs.execute("create table menutest("sino" int,"proname" int(20),"price" int(7),"producer" varchar(20), "bathcno" varchar(10))
+    curs.execute("create table employeetest("admno" int(5),"name" varchar(20),"phoneno" int(20),"sex" varchar(4),"age" int(3))
+    print("congrats on purchasing our program.")
+    print("installation of our program is complete please proceed to the main program")
+    
+    
+    
+    
+    
+    
   elif choice=="n":
     print("please use the other program")
 
   else:
     print("please type an actual value")
+    checker()
