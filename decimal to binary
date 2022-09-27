@@ -1,0 +1,23 @@
+def Db(n):
+    L=[]
+    
+    while n!=0:
+        
+        a=n%2
+        n=n//2
+        L.append(a)
+    for i in L[::-1]:
+        print(i,end="")
+x="y"   
+while x=="y":
+ 
+    print("enter a number")
+    c=int(input(">>>"))
+    Db(c)
+    print("")
+    print("do you want to continue ?")
+    print("type y to continue and n to stop")
+    x=input(">>>")
+
+    
+exit()
