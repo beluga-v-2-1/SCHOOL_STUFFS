@@ -165,6 +165,27 @@ def viewmenu():
     for i in table:
         print(i)
     startcustomer()
+
+def checker():
+    
+    print("is this the first time initiating this program ?")
+
+    print("type y for yes and n for no")
+    choice=input(">>>")
+    if choice=="y":
+        curs.execute("create database test")
+        curs.execute("create table menutest("sino" int,"proname" varchar(20),"price" int,"producer" varchar(15), "batchno" varchar))
+        curs.execute("create table employeetest("admno" int(5),"name" varchar(20),"phoneno" int(20),"sex" varchar(4),"age" int(3))
+        print("congrats on purchasing our program.")
+        print("installation of our program is complete please proceed to the main program")
+        welcomescreen()  
+    elif choice=="n":
+        print("please use the other program")
+        welcomescreen()
+
+    else:
+      print("please type an actual value")
+      checker()
 def insertfood():
     nott=0
     ty2("Alright... lets add a new product")
@@ -244,6 +265,7 @@ def welcomescreen():
     print("+------------------------------------+-------------------------+")
     print("| Customer                           | TYPE 1                  |")
     print("| Retailer                           | TYPE 2                  |")
+    print("| install max.in                     | TYPE 3                  |")
     print("| end this whole program             | TYPE end                |")
     print("+------------------------------------+-------------------------+")
     print()
@@ -255,6 +277,8 @@ def welcomescreen():
         startcustomer()
     elif choice=="2":
         employeescreen()
+    elif choice=="3":
+        checker()
     else:
         ty2("please enter a number")
 def priceview():
