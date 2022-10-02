@@ -174,8 +174,9 @@ def checker():
     choice=input(">>>")
     if choice=="y":
         curs.execute("create database test")
-        curs.execute("create table menutest("sino" int,"proname" varchar(20),"price" int,"producer" varchar(15), "batchno" varchar))
-        curs.execute("create table employeetest("admno" int(5),"name" varchar(20),"phoneno" int(20),"sex" varchar(4),"age" int(3)))
+        curs.execute("create table menutest('sino' int(20),'proname' varchar(20),'price' int(20),'producer' varchar(15), 'batchno' varchar(20))")
+        #curs.execute("create table menutest("sino" int(),"proname" varchar(20),"price" int(),"producer" varchar(15), "batchno" varchar)")
+        curs.execute("create table employeetest('admno' int(5),'name' varchar(20),'phoneno' int(20),'sex' varchar(4),'age' int(3))")
         print("congrats on purchasing our program.")
         ty2("installation of our program is complete please proceed to the main program")
         welcomescreen()  
@@ -425,5 +426,6 @@ def employeescreen():
         startscreen()
         
 welcomescreen()
+
 
 
