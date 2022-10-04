@@ -11,19 +11,19 @@ def end():
 def ty1( message ) :
     for i in message :
         print(i,end="")
-        time.sleep(0.00007)
+        time.sleep(0.07)
     print()
     
 def ty2(message):
     for i in message :
         print(i,end="")
-        time.sleep(0.000001)
+        time.sleep(0.01)
     print()
     
 def ty3(message):
     for i in message :
         print(i,end="")
-        time.sleep(0.0000001)
+        time.sleep(0.001)
     print()
     
 def addpeople():
