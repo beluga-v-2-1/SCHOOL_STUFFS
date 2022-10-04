@@ -1,8 +1,7 @@
 import mysql.connector
 import time 
-c=mysql.connector.connect(host="localhost",user="root",password="password",database="test",charset="utf8")
+c=mysql.connector.connect(host="localhost",user="root",password="password",charset="utf8")
 curs=c.cursor()
-curs.execute("use test")
 m=0
 
 def end():
@@ -174,9 +173,9 @@ def checker():
     choice=input(">>>")
     if choice=="y":
         curs.execute("create database test")
-        curs.execute("create table menutest('sino' int(20),'proname' varchar(20),'price' int(20),'producer' varchar(15), 'batchno' varchar(20))")
-        #curs.execute("create table menutest("sino" int(),"proname" varchar(20),"price" int(),"producer" varchar(15), "batchno" varchar)")
-        curs.execute("create table employeetest('admno' int(5),'name' varchar(20),'phoneno' int(20),'sex' varchar(4),'age' int(3))")
+        curs.execute("create table menutest('sino' varchar(8),'proname' varchar(20),'price' varchar(6),'producer' varchar(15), 'batchno' varchar(10))") #error here
+        curs.execute("create table employeetest('admno' varchar(5),'name' varchar(20),'phoneno' varchar(20),'sex' varchar(4),'age' varchar(3))")        #error here
+        
         print("congrats on purchasing our program.")
         ty2("installation of our program is complete please proceed to the main program")
         welcomescreen()  
