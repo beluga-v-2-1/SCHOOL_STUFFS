@@ -86,6 +86,7 @@ def addpeople():
         ty2("try using your brain and enter a proper number ?")
         addpeople()
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
+    c.commit()
     curs.execute("select * from employeetest")
     results=curs.fetchall()
     for i in results :
@@ -112,6 +113,7 @@ def specview():
             startcustomer()
         elif len(n)!=0:       
             curs.execute("select * from menutest where proname like'{}%'".format(n))
+            
             table=curs.fetchall()
             if len(table)==0:
                 ty2("there are no results for your search")
@@ -147,6 +149,7 @@ def deleteemployee():
     elif choice.lower()=="y":
         print(f"deleting {finite} from the database of employees")
         curs.execute("delete from employeetest where admno={}".format(name))
+        c.commit()
         print(f"succesfully deleted {finite} from the database")
         ty2("would you like to delete more or return back to main menu")
         ty3("type y for yes")
@@ -184,7 +187,7 @@ def checker():
             curs.execute("use test")
             curs.execute("create table menutest(sino varchar(8),proname varchar(20),price varchar(6),producer varchar(15), batchno varchar(10))") 
             curs.execute("create table employeetest(admno varchar(5),name varchar(20),phoneno varchar(20),sex varchar(4),age varchar(3))")        
-            
+            c.commit()
             print("congrats on purchasing our program.")
             ty2("installation of our program is complete please proceed to the main program")
             welcomescreen()  
@@ -244,6 +247,7 @@ def insertfood():
         ty2("try and enter a proper number ?")
         insertfood()
     curs.execute("insert into menutest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
+    c.commit()
     curs.execute("select * from menutest")
     results=curs.fetchall()
     for i in results :
