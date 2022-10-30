@@ -1,0 +1,9 @@
+If you use my desktop computer,
+you might already know that there
+isn't any single part called the 
+"computer . " on my computer . A computer
+ is really asystem of many parts working 
+together . The physical parts, which you can see
+and touch, are collectively called hardware .
+Software, on the other hand, refers to the instructions
+or programs, that tell the hardware what to do .
