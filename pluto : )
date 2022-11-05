@@ -1,6 +1,4 @@
-
-try:
-    
+try:  
     import mysql.connector
 except ModuleNotFoundError as e:
     print(e)
@@ -8,26 +6,17 @@ except ModuleNotFoundError as e:
     print("try fixing this issue by installing the module")
     print("exiting the program")
     exit()
-
 c=mysql.connector.connect(host="localhost",user="root",password="password",charset="utf8")
 curs=c.cursor()
 m=0
-
-
 #here we have imported mysql this program requires it
 #the database name is not set yet and
 #the password is "password" change it if need be.. 
-
-
-
 def end():
     print("thanks for using my program")
     exit()
-
 #this function is used to exit the whole program
-
-    
-#def print(message):
+#def ty3(message):
 #    for i in message :
 #        print(i,end="")
 #        time.sleep(0.001)
@@ -36,8 +25,6 @@ def end():
 #printing/displaying of letters to give a more old school feel
 #but ive now replaced it with just regular print to make it
 #easier to learn
-
-
 def addpeople():
     nott=0
     print("Alright... lets add new employees")
@@ -97,21 +84,17 @@ def addpeople():
     elif n5.isdigit()==False:                       #enterring 
         print("try using your brain and enter a proper number ?")
         addpeople()
-
                                                     #enterring admissionnumber,name,phonennumber,gender,age into the table "employeetest"
-    
     curs.execute("insert into employeetest values('{}','{}','{}','{}','{}')".format(n1,n2,n3,n4,n5))
     c.commit()
                                                     #since we are using python-mysql connector, the autocommit is turned off by default
                                                     #so we have to manually turn it on by using "c.commit"
-    
     curs.execute("select * from employeetest")      #to list out the table again
     results=curs.fetchall()
     for i in results :
         print(i)
     print("process done")
-    employeescreen()
-    
+    employeescreen()   
 def view():
     curs.execute("use test")
     curs.execute("select * from employeetest")
@@ -119,7 +102,6 @@ def view():
     for i in table:
         print(i)
     employeescreen()
-    
 def specview():
     try:
         curs.execute("use test")
@@ -145,12 +127,11 @@ def specview():
                 startcustomer()
         else:
             print("enter any charecter")                              #try exception block is used here to catch any errors and prevent the
-                                                                      #the program from throwing an error and exiting the program unexpectedly
+                                                                    #the program from throwing an error and exiting the program unexpectedly
             specview()
     except Exception as e:
         print(f"sorry there has been an issue with your computer please try some other time")
-        welcomescreen()
-        
+        welcomescreen()      
 def deleteemployee():
     curs.execute("use test")
     print("enter the admno of the person you want to delete")
@@ -193,9 +174,7 @@ def viewmenu():
     for i in table:
         print(i)
     startcustomer()
-
-def checker():
-    
+def checker():   
     print("is this the first time initiating this program ?")                 
     print("type y for yes and n for no")                                        #this program is used to install the databases and start a table
     choice=input(">>>")                                                         #try exception block is used to catch any error such as the database
@@ -212,17 +191,12 @@ def checker():
         elif choice=="n":
             print("please use the other program")
             welcomescreen()
-
         else:
           print("please type an actual value")
-          checker()
-    
+          checker()    
     except mysql.connector.errors.DatabaseError as e:
         print("the database that you are trying to add already exists in the computer")
-        welcomescreen()
-
-
-        
+        welcomescreen()     
 def insertfood():
     curs.execute("use test")
     nott=0
@@ -292,7 +266,6 @@ def insertfood():
     else :
         print("please enter a alphabetical value(either end, y or n)")
         insertfood()
-
 def welcomescreener():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX                            |")
@@ -375,26 +348,19 @@ def employeesearch():
             print(i)
         print("this is all the available search ")
         print("would you like to search another type y or n or end")
-        xender=input(">>>")
-        
+        xender=input(">>>")        
         if xender.lower()=="end":
             print("moving to employee menu")
-            employeescreen()
-            
+            employeescreen()           
         elif xender.lower()=="y":
             print("lets search a new employee")
             employeesearch()
-            
         elif xender.lower()=="n":
             print("moving to employee menu")
-            employeescreen()
-            
+            employeescreen()  
         else:
             print("moving to employee menu")
             employeescreen()
-            
-        
-  
 def startcustomer():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX (customer edition)         |")
@@ -412,36 +378,27 @@ def startcustomer():
     print("enter your choice")
     choice=input(">>>")
     digit=choice.isdigit()
-    
     if choice=="end":
         print("moving to welcome screen")
         welcomescreen()
-        
     elif digit==False:
         print("PLEASE ENTER A NUMBER")
         startcustomer()
-        
     elif choice=="1":                                      #first viewing product list
         print("heres the list of all products")
         viewmenu()
-        
     elif choice=="2":                                      #second searching for a product
         specview()
-        
     elif choice=="3":                                      #third viewing in asc order
         print("here is the product list in the ascending order")
         priceview()
-        
     elif choice=="4":                                      #fourth going back to welcome screen
         welcomescreen()
-        
     elif choice=="5":                                      #fifth exiting the program
         exit()
-        
     else:
         print("please enter a valid option either end y,n")
         startcustomer()
-        
 def employeescreen():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO HYPERMARKET MAX (Retailer edition)         |")
@@ -450,8 +407,8 @@ def employeescreen():
     print("+--------------------------------------------------------------+")
     print("| WHAT DO YOU NEED HELP WITH ?                                 |")
     print("+-----------------------------------+--------------------------+")   #employee version
-    print("| Add employees                     | TYPE 1                   |")
-    print("| View employee list                | TYPE 2                   |")
+    print("| Add employees                     | TYPE 1                   |")   #this menu has much more administrative control
+    print("| View employee list                | TYPE 2                   |")   
     print("| Delete an employee with admno     | TYPE 3                   |")
     print("| Search an employee with name      | TYPE 4                   |")
     print("| go back to the welcome screen     | TYPE 5                   |")
@@ -459,7 +416,6 @@ def employeescreen():
     print("| add an item into the grocery list | TYPE 7                   |")    
     print("+-----------------------------------+--------------------------+")
     print()
-    
     print("enter your choice")
     choice=input(">>>")
     digit=choice.isdigit()
@@ -496,4 +452,4 @@ def employeescreen():
         print("please enter a valid option")
         startscreen()
         
-welcomescreener()
+welcomescreener()                                         #this calls and starts the whole program
