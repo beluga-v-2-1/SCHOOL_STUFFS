@@ -266,7 +266,7 @@ def insertfood():
         insertfood()
     elif choice.lower()=="n":
         ty2("exiting to main menu")
-        customerscreen()
+        employeescreen()
     else :
         print("please enter a alphabetical value(either end, y or n)")
         insertfood()
